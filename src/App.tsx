@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC } from "react";
+import { style } from "typestyle";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { pages, Page } from "./config";
+import { paragraphStyle } from "./styles/typography";
+import { globalOverrides } from "./styles/overrides";
+import { px } from "csx";
 
-function App() {
+type Props = {};
+
+const appClass = style(
+  {
+    paddingTop: px(40),
+    paddingBottom: px(40),
+  },
+  globalOverrides,
+  paragraphStyle
+);
+
+export const App: FC<Props> = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={appClass}>
+      <Router>
+        <Switch>
+          {pages.map(({ path, component }: Page) => (
+            <Route exact path={path} component={component} />
+          ))}
+        </Switch>
+      </Router>
     </div>
   );
-}
-
-export default App;
+};
