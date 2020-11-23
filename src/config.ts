@@ -13,3 +13,7 @@ export const pages: Page[] = [
     component: Dashboard,
   },
 ];
+
+export const apolloConfig = {
+  uri: "http://localhost:4100/graphql",
+};

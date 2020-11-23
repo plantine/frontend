@@ -1,10 +1,13 @@
 import React, { FC } from "react";
 import { style } from "typestyle";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { pages, Page } from "./config";
 import { paragraphStyle } from "./styles/typography";
 import { globalOverrides } from "./styles/overrides";
 import { px } from "csx";
+
+import { Dashboard } from "./pages/Dashboard";
+import { Plants } from "./pages/Plants";
+import { PlantDetail } from "./pages/Plants/id";
 
 type Props = {};
 
@@ -22,9 +25,9 @@ export const App: FC<Props> = () => {
     <div className={appClass}>
       <Router>
         <Switch>
-          {pages.map(({ path, component }: Page) => (
-            <Route exact path={path} component={component} />
-          ))}
+          <Route exact path="/" component={Dashboard} />
+          <Route exact path="/plants" component={Plants} />
+          <Route path="/plants/:id" component={PlantDetail} />
         </Switch>
       </Router>
     </div>
